@@ -6,21 +6,27 @@ import org.springframework.stereotype.Service;
 public class SortingService {
 
     public int[] bubbleSort(int[] array) {
-        Bubble.sort(array); // Bubble.sort(array
+        Bubble bubble = new Bubble();
+        bubble.sort(array);
         return array;
-
     }
 
     public int[] insertionSort(int[] array) {
-        return Insertion.insertionSort(array);
+        Insertion insertion = new Insertion();
+        insertion.sort(array);
+        return array;
     }
 
     public int[] mergeSort(int[] array) {
-        return Merge.mergeSort(array);
+        Merge merge = new Merge();
+        merge.sort(array);
+        return array;
     }
 
     public int[] selectionSort(int[] array) {
-        return Selection.selectionSort(array);
+        Selection selection = new Selection();
+        selection.sort(array);
+        return array;
     }
 
 }
