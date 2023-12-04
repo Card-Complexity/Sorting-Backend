@@ -1,5 +1,7 @@
 
-public class mergeSort extends genericSort {
+package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
+
+public class Merge extends Generics {
     @Override
     public void sort(int[] arr) {
         // reset instance variables
@@ -25,23 +27,20 @@ public class mergeSort extends genericSort {
         }
     }
 
-
     private void merge(int[] arr, int left, int mid, int right) {
 
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
-
         int[] leftArr = new int[n1];
         int[] rightArr = new int[n2];
 
-
         for (int i = 0; i < n1; ++i)
             leftArr[i] = arr[left + i];
-            swaps++;
+        swaps++;
         for (int j = 0; j < n2; ++j)
             rightArr[j] = arr[mid + 1 + j];
-            swaps++;
+        swaps++;
 
         // merging arrays
 
@@ -78,7 +77,7 @@ public class mergeSort extends genericSort {
     }
 
     public static void main(String[] args) {
-        mergeSort m = new mergeSort();
+        Merge m = new Merge();
         m.testRandomValues();
         m.test();
     }

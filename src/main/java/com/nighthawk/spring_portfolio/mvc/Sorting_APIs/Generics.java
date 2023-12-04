@@ -1,7 +1,9 @@
+package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
+
 import java.util.Arrays;
 import java.util.Random;
 
-public class genericSort {
+public class Generics {
     // instance variables to keep track of iterations, comparisons, and swaps
     protected int iterations;
     protected int comparisons;

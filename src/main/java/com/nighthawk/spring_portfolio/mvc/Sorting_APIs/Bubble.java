@@ -1,4 +1,6 @@
-public class bubbleSort extends genericSort {
+package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
+
+public class Bubble extends Generics {
     @Override
     public void sort(int[] arr) {
         iterations = 0;
@@ -21,10 +23,10 @@ public class bubbleSort extends genericSort {
             }
         }
     }
+
     public static void main(String[] args) {
-        bubbleSort bs = new bubbleSort();
+        Bubble bs = new Bubble();
         bs.testRandomValues();
         bs.test();
     }
 }
-bubbleSort.main(null);

@@ -1,5 +1,6 @@
+package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
 
-public class selectionSort extends genericSort {
+public class Selection extends Generics {
     @Override
     public void sort(int[] arr) {
         iterations = 0;
@@ -22,10 +23,10 @@ public class selectionSort extends genericSort {
             swaps++;
         }
     }
+
     public static void main(String[] args) {
-        selectionSort ss = new selectionSort();
+        Selection ss = new Selection();
         ss.testRandomValues();
         ss.test();
     }
 }
-

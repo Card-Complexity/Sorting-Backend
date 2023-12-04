@@ -1,6 +1,8 @@
+package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
 
+import org.hibernate.sql.Insert;
 
-public class insertionSort extends genericSort {
+public class Insertion extends Generics {
     @Override
     public void sort(int[] arr) {
         iterations = 0;
@@ -24,7 +26,7 @@ public class insertionSort extends genericSort {
     }
 
     public static void main(String[] args) {
-        insertionSort is = new insertionSort();
+        Insertion is = new Insertion();
         is.testRandomValues();
         is.test();
     }
