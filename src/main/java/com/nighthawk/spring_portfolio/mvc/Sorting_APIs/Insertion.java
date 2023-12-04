@@ -14,13 +14,13 @@ public class Insertion extends Generics {
             int key = arr[i];
             int j = i - 1;
             while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
+                arr[j + 1] = arr[j]; // Element changes position
                 j--;
                 iterations++;
                 comparisons++;
                 swaps++;
             }
-            arr[j + 1] = key;
+            arr[j + 1] = key; // Element changes position
             swaps++;
         }
     }
