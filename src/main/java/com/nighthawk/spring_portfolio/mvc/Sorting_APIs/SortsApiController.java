@@ -23,4 +23,20 @@ public class SortsApiController {
     public int[] bubbleSort(@RequestBody int[] array) {
         return sortingService.bubbleSort(array);
     }
+
+    @PostMapping("/insertion")
+    public int[] insertionSort(@RequestBody int[] array) {
+        return sortingService.insertionSort(array);
+    }
+
+    @PostMapping("/merge")
+    public int[] mergeSort(@RequestBody int[] array) {
+        return sortingService.mergeSort(array);
+    }
+
+    @PostMapping("/selection")
+    public int[] selectionSort(@RequestBody int[] array) {
+        return sortingService.selectionSort(array);
+    }
+    
 }
