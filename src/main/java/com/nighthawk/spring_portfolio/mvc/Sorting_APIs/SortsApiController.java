@@ -20,23 +20,23 @@ public class SortsApiController {
     }
 
     @PostMapping("/bubble")
-    public int[] bubbleSort(@RequestBody int[] array) {
-        return sortingService.bubbleSort(array);
+    public int[] bubbleSort(@RequestBody int[] cards) {
+        return sortingService.bubbleSort(cards);
     }
 
     @PostMapping("/insertion")
-    public int[] insertionSort(@RequestBody int[] array) {
-        return sortingService.insertionSort(array);
+    public int[] insertionSort(@RequestBody int[] cards) {
+        return sortingService.insertionSort(cards);
     }
 
     @PostMapping("/merge")
-    public int[] mergeSort(@RequestBody int[] array) {
-        return sortingService.mergeSort(array);
+    public int[] mergeSort(@RequestBody int[] cards) {
+        return sortingService.mergeSort(cards);
     }
 
     @PostMapping("/selection")
-    public int[] selectionSort(@RequestBody int[] array) {
-        return sortingService.selectionSort(array);
+    public int[] selectionSort(@RequestBody int[] cards) {
+        return sortingService.selectionSort(cards);
     }
     
 }
