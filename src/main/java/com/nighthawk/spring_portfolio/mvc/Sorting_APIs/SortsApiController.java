@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
-@RequestMapping("http://127.0.0.1:5500/cardtest.html/api/sorts")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
+@RequestMapping("/api/sorts")
 public class SortsApiController {
 
     private final SortingService sortingService;
