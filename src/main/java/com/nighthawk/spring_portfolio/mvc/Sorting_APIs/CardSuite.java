@@ -46,7 +46,8 @@ class BubbleSuite extends CardSuite {
         swaps = 0;
 
         int n = arr.length;
-        JsonArray movements = new JsonArray();
+        JsonArray movements = new JsonArray(); // can remove for actual implementation not needed as we will just be
+                                               // sending movement by movement
 
         for (int i = 0; i < n - 1; i++) {
             iterations++;
@@ -61,10 +62,10 @@ class BubbleSuite extends CardSuite {
 
                     // Add movement to JSON array
                     JsonObject movement = new JsonObject();
-                    movement.put("B", arr[j]);
-                    movement.put("Original", j);
-                    movement.put("Final", j + 1);
-                    movements.put(movement);
+                    movement.addProperty("B", arr[j]);
+                    movement.addProperty("Original", j);
+                    movement.addProperty("Final", j + 1);
+                    movements.add(movement);
                 }
                 iterations++;
             }
