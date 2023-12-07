@@ -1,7 +1,13 @@
 package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
+
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -62,13 +68,28 @@ class BubbleSuite extends CardSuite {
 
                     // Add movement to JSON array
                     JsonObject movement = new JsonObject();
+                    movement.addProperty("app_key", "KEYw1tgnlY7Wo30XsxoAOeY6gQcbn89CA1H");
+                    movement.addProperty("app_secret", "SECRETeR6X1BGYWOgXcEK6wfIPDOyYerOjzFIC");
+                    movement.addProperty("channel", "BubbleChannel");
                     movement.addProperty("B", arr[j]);
                     movement.addProperty("Original", j);
-                    movement.addProperty("Final", j + 1);
-                    movements.add(movement);
+                    try {
+                        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+                        HttpPost request = new HttpPost("https://rejax.io:3001/api/server");
+                        StringEntity params = new StringEntity(movement.toString());
+                        request.addHeader("Content-Type", "application/json");
+                        request.setEntity(params);
+                        httpClient.execute(request);
+                        // handle response here...
+                    } catch (IOException ex) {
+                        // handle exception here
+                        ex.printStackTrace();
+                    }
                 }
                 iterations++;
+                break;
             }
+            break;
         }
 
         // Convert JSON array to string
