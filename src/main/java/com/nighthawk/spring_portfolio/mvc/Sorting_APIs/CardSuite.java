@@ -173,109 +173,13 @@ class InsertionSuite extends CardSuite {
         // Send the JSON string via HTTP request or do further processing
         System.out.println(jsonMovements);
     }
-}
-
-class MergeSuite extends CardSuite {
-    @Override
-    public void sort(int[] arr) {
-        iterations = 0;
-        comparisons = 0;
-        swaps = 0;
-
-        int n = arr.length;
-        JsonArray movements = new JsonArray();
-        mergeSort(arr, 0, n - 1, movements);
-
-        // Convert JSON array to string
-        String jsonMovements = movements.toString();
-
-        // Send the JSON string via HTTP request or do further processing
-        System.out.println(jsonMovements);
-    }
-
-    private void mergeSort(int[] arr, int left, int right, JsonArray movements) {
-        if (left < right) {
-            int mid = (left + right) / 2;
-
-            // sorting halves
-            mergeSort(arr, left, mid, movements);
-            mergeSort(arr, mid + 1, right, movements);
-
-            // merging sorted halves
-            merge(arr, left, mid, right, movements);
-        }
-    }
-
-    private void merge(int[] arr, int left, int mid, int right, JsonArray movements) {
-
-        int n1 = mid - left + 1;
-        int n2 = right - mid;
-
-        int[] leftArr = new int[n1];
-        int[] rightArr = new int[n2];
-
-        for (int i = 0; i < n1; ++i) {
-            leftArr[i] = arr[left + i];
-            swaps++;
-        }
-        for (int j = 0; j < n2; ++j) {
-            rightArr[j] = arr[mid + 1 + j];
-            swaps++;
-        }
-
-        // merging arrays
-
-        int i = 0, j = 0;
-
-        int k = left;
-        while (i < n1 && j < n2) {
-            iterations++;
-            if (leftArr[i] <= rightArr[j]) {
-                arr[k] = leftArr[i];
-                i++;
-            } else {
-                arr[k] = rightArr[j];
-                j++;
-            }
-            k++;
-            swaps++;
-            comparisons++;
-        }
-
-        while (i < n1) {
-            arr[k] = leftArr[i];
-            i++;
-            k++;
-            swaps++;
-        }
-
-        while (j < n2) {
-            arr[k] = rightArr[j];
-            j++;
-            k++;
-            swaps++;
-        }
-
-        // Add movement to JSON array
-        JsonObject movement = new JsonObject();
-        movement.addProperty("M", arr[k]);
-        movement.addProperty("Original", left);
-        movement.addProperty("Final", right);
-        movements.add(movement);
-
-        // Convert JSON array to string
-        String jsonMovements = movements.toString();
-
-        // Send the JSON string via HTTP request or do further processing
-        System.out.println(jsonMovements);
-    }
 
     public static void main(String[] args) {
         // BubbleSuite bs = new BubbleSuite();
         // bs.testRandomValues();
-        // SelectionSuite ss = new SelectionSuite();
-        // ss.testRandomValues();
-        InsertionSuite is = new InsertionSuite();
-        is.testRandomValues();
+        SelectionSuite ss = new SelectionSuite();
+        ss.testRandomValues();
+        // InsertionSuite is = new InsertionSuite();
+        // is.testRandomValues();
     }
 }
