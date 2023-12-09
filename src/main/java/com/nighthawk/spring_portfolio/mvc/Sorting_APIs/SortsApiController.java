@@ -10,7 +10,7 @@ import java.util.Optional;
 
 
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin()
 @RequestMapping("/api/sorts")
 public class SortsApiController {
 
@@ -22,22 +22,22 @@ public class SortsApiController {
     }
 
     @PostMapping("/bubble")
-    public int[] bubbleSort(@RequestBody int[] cards) {
+    public String[] bubbleSort(@RequestBody String[] cards) {
         return sortingService.bubbleSort(cards);
     }
 
     @PostMapping("/insertion")
-    public int[] insertionSort(@RequestBody int[] cards) {
+    public String[] insertionSort(@RequestBody String[] cards) {
         return sortingService.insertionSort(cards);
     }
 
     @PostMapping("/merge")
-    public int[] mergeSort(@RequestBody int[] cards) {
+    public String[] mergeSort(@RequestBody String[] cards) {
         return sortingService.mergeSort(cards);
     }
 
     @PostMapping("/selection")
-    public int[] selectionSort(@RequestBody int[] cards) {
+    public String[] selectionSort(@RequestBody String[] cards) {
         return sortingService.selectionSort(cards);
     }
     
