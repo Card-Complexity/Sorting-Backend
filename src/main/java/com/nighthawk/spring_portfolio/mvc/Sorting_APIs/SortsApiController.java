@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @CrossOrigin()
 @RequestMapping("/api/sorts")
@@ -22,23 +21,23 @@ public class SortsApiController {
     }
 
     @PostMapping("/bubble")
-    public String[] bubbleSort(@RequestBody String[] cards) {
+    public int[] bubbleSort(@RequestBody int[] cards) {
         return sortingService.bubbleSort(cards);
     }
 
     @PostMapping("/insertion")
-    public String[] insertionSort(@RequestBody String[] cards) {
+    public int[] insertionSort(@RequestBody int[] cards) {
         return sortingService.insertionSort(cards);
     }
 
     @PostMapping("/merge")
-    public String[] mergeSort(@RequestBody String[] cards) {
+    public int[] mergeSort(@RequestBody int[] cards) {
         return sortingService.mergeSort(cards);
     }
 
     @PostMapping("/selection")
-    public String[] selectionSort(@RequestBody String[] cards) {
+    public int[] selectionSort(@RequestBody int[] cards) {
         return sortingService.selectionSort(cards);
     }
-    
+
 }

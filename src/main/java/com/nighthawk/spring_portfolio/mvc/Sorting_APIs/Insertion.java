@@ -1,7 +1,5 @@
 package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
 
-import org.hibernate.sql.Insert;
-
 public class Insertion extends Generics {
     @Override
     public void sort(int[] arr) {

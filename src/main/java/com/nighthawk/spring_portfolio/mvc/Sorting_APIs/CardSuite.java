@@ -1,18 +1,12 @@
 package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
-
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class CardSuite extends Generics {
+
     @Override
     public void testRandomValues() {
         int[] arr = new int[13];
@@ -41,6 +35,18 @@ public class CardSuite extends Generics {
         System.out.println("Swaps: " + swaps);
         System.out.println("Comparisons: " + comparisons);
         System.out.println("Time taken: " + duration + " milliseconds");
+
+        // Create analytics JSON object
+        JsonObject analytics = new JsonObject();
+        analytics.addProperty("BeforeSorting", Arrays.toString(arr));
+        analytics.addProperty("AfterSorting", Arrays.toString(arr));
+        analytics.addProperty("Iterations", iterations);
+        analytics.addProperty("Swaps", swaps);
+        analytics.addProperty("Comparisons", comparisons);
+        analytics.addProperty("TimeTaken", duration);
+
+        // Send the analytics JSON object via HTTP request or do further processing
+        System.out.println("Analytics: " + analytics.toString());
     }
 }
 
@@ -52,8 +58,7 @@ class BubbleSuite extends CardSuite {
         swaps = 0;
 
         int n = arr.length;
-        JsonArray movements = new JsonArray(); // can remove for actual implementation not needed as we will just be
-                                               // sending movement by movement
+        JsonArray movements = new JsonArray();
 
         for (int i = 0; i < n - 1; i++) {
             iterations++;
@@ -68,29 +73,195 @@ class BubbleSuite extends CardSuite {
 
                     // Add movement to JSON array
                     JsonObject movement = new JsonObject();
-                    movement.addProperty("app_key", "KEYw1tgnlY7Wo30XsxoAOeY6gQcbn89CA1H");
-                    movement.addProperty("app_secret", "SECRETeR6X1BGYWOgXcEK6wfIPDOyYerOjzFIC");
-                    movement.addProperty("channel", "BubbleChannel");
                     movement.addProperty("B", arr[j]);
                     movement.addProperty("Original", j);
-                    try {
-                        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-                        HttpPost request = new HttpPost("https://rejax.io:3001/api/server");
-                        StringEntity params = new StringEntity(movement.toString());
-                        request.addHeader("Content-Type", "application/json");
-                        request.setEntity(params);
-                        httpClient.execute(request);
-                        // handle response here...
-                    } catch (IOException ex) {
-                        // handle exception here
-                        ex.printStackTrace();
-                    }
+                    movement.addProperty("Final", j + 1);
+                    movements.add(movement);
                 }
                 iterations++;
-                break;
             }
-            break;
         }
+
+        // Convert JSON array to string
+        String jsonMovements = movements.toString();
+
+        // Send the JSON string via HTTP request or do further processing
+        System.out.println(jsonMovements);
+    }
+}
+
+class SelectionSuite extends CardSuite {
+    @Override
+    public void sort(int[] arr) {
+        iterations = 0;
+        comparisons = 0;
+        swaps = 0;
+
+        int n = arr.length;
+        JsonArray movements = new JsonArray();
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n - 1; i++) {
+            iterations++;
+            // Find the minimum element in unsorted array
+            int min_idx = i;
+            for (int j = i + 1; j < n; j++) {
+                comparisons++;
+                if (arr[j] < arr[min_idx]) {
+                    min_idx = j;
+                }
+                iterations++;
+            }
+
+            // Swap the found minimum element with the first
+            // element
+            swaps++;
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+
+            // Add movement to JSON array
+            JsonObject movement = new JsonObject();
+            movement.addProperty("S", arr[i]);
+            movement.addProperty("Original", min_idx);
+            movement.addProperty("Final", i);
+            movements.add(movement);
+        }
+
+        // Convert JSON array to string
+        String jsonMovements = movements.toString();
+
+        // Send the JSON string via HTTP request or do further processing
+        System.out.println(jsonMovements);
+    }
+}
+
+class InsertionSuite extends CardSuite {
+    @Override
+    public void sort(int[] arr) {
+        iterations = 0;
+        comparisons = 0;
+        swaps = 0;
+
+        int n = arr.length;
+        JsonArray movements = new JsonArray();
+        for (int i = 1; i < n; ++i) {
+            int key = arr[i];
+            int j = i - 1;
+
+            iterations++;
+            while (j >= 0 && arr[j] > key) {
+                comparisons++;
+                swaps++;
+                arr[j + 1] = arr[j];
+                j = j - 1;
+                iterations++;
+            }
+            swaps++;
+            arr[j + 1] = key;
+
+            // Add movement to JSON array
+            JsonObject movement = new JsonObject();
+            movement.addProperty("I", arr[j + 1]);
+            movement.addProperty("Original", i);
+            movement.addProperty("Final", j + 1);
+            movements.add(movement);
+        }
+
+        // Convert JSON array to string
+        String jsonMovements = movements.toString();
+
+        // Send the JSON string via HTTP request or do further processing
+        System.out.println(jsonMovements);
+    }
+}
+
+class MergeSuite extends CardSuite {
+    @Override
+    public void sort(int[] arr) {
+        iterations = 0;
+        comparisons = 0;
+        swaps = 0;
+
+        int n = arr.length;
+        JsonArray movements = new JsonArray();
+        mergeSort(arr, 0, n - 1, movements);
+
+        // Convert JSON array to string
+        String jsonMovements = movements.toString();
+
+        // Send the JSON string via HTTP request or do further processing
+        System.out.println(jsonMovements);
+    }
+
+    private void mergeSort(int[] arr, int left, int right, JsonArray movements) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+
+            // sorting halves
+            mergeSort(arr, left, mid, movements);
+            mergeSort(arr, mid + 1, right, movements);
+
+            // merging sorted halves
+            merge(arr, left, mid, right, movements);
+        }
+    }
+
+    private void merge(int[] arr, int left, int mid, int right, JsonArray movements) {
+
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        int[] leftArr = new int[n1];
+        int[] rightArr = new int[n2];
+
+        for (int i = 0; i < n1; ++i) {
+            leftArr[i] = arr[left + i];
+            swaps++;
+        }
+        for (int j = 0; j < n2; ++j) {
+            rightArr[j] = arr[mid + 1 + j];
+            swaps++;
+        }
+
+        // merging arrays
+
+        int i = 0, j = 0;
+
+        int k = left;
+        while (i < n1 && j < n2) {
+            iterations++;
+            if (leftArr[i] <= rightArr[j]) {
+                arr[k] = leftArr[i];
+                i++;
+            } else {
+                arr[k] = rightArr[j];
+                j++;
+            }
+            k++;
+            swaps++;
+            comparisons++;
+        }
+
+        while (i < n1) {
+            arr[k] = leftArr[i];
+            i++;
+            k++;
+            swaps++;
+        }
+
+        while (j < n2) {
+            arr[k] = rightArr[j];
+            j++;
+            k++;
+            swaps++;
+        }
+
+        // Add movement to JSON array
+        JsonObject movement = new JsonObject();
+        movement.addProperty("M", arr[k]);
+        movement.addProperty("Original", left);
+        movement.addProperty("Final", right);
+        movements.add(movement);
 
         // Convert JSON array to string
         String jsonMovements = movements.toString();
@@ -100,7 +271,11 @@ class BubbleSuite extends CardSuite {
     }
 
     public static void main(String[] args) {
-        BubbleSuite bs = new BubbleSuite();
-        bs.testRandomValues();
+        // BubbleSuite bs = new BubbleSuite();
+        // bs.testRandomValues();
+        // SelectionSuite ss = new SelectionSuite();
+        // ss.testRandomValues();
+        InsertionSuite is = new InsertionSuite();
+        is.testRandomValues();
     }
 }
