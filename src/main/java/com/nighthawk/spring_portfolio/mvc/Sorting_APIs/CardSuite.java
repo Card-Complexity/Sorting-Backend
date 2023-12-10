@@ -7,8 +7,7 @@ import com.google.gson.JsonObject;
 
 public class CardSuite extends Generics {
 
-    @Override
-    public void testRandomValues() {
+    public JsonObject cardPopulate() {
         int[] arr = new int[13];
         Random rand = new Random();
         boolean[] used = new boolean[14]; // to keep track of used values
@@ -26,7 +25,7 @@ public class CardSuite extends Generics {
 
         // Perform sorting and measure time
         long startTime = System.nanoTime();
-        sort(arr);
+        cardSort(arr);
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1000000; // in milliseconds
 
@@ -47,12 +46,17 @@ public class CardSuite extends Generics {
 
         // Send the analytics JSON object via HTTP request or do further processing
         System.out.println("Analytics: " + analytics.toString());
+        return analytics;
+    }
+
+    public String cardSort(int[] arr) {
+        return "";
     }
 }
 
 class BubbleSuite extends CardSuite {
     @Override
-    public void sort(int[] arr) {
+    public String cardSort(int[] arr) {
         iterations = 0;
         comparisons = 0;
         swaps = 0;
@@ -87,12 +91,14 @@ class BubbleSuite extends CardSuite {
 
         // Send the JSON string via HTTP request or do further processing
         System.out.println(jsonMovements);
+
+        return jsonMovements;
     }
 }
 
 class SelectionSuite extends CardSuite {
     @Override
-    public void sort(int[] arr) {
+    public String cardSort(int[] arr) {
         iterations = 0;
         comparisons = 0;
         swaps = 0;
@@ -132,12 +138,13 @@ class SelectionSuite extends CardSuite {
 
         // Send the JSON string via HTTP request or do further processing
         System.out.println(jsonMovements);
+        return jsonMovements;
     }
 }
 
 class InsertionSuite extends CardSuite {
     @Override
-    public void sort(int[] arr) {
+    public String cardSort(int[] arr) {
         iterations = 0;
         comparisons = 0;
         swaps = 0;
@@ -172,12 +179,13 @@ class InsertionSuite extends CardSuite {
 
         // Send the JSON string via HTTP request or do further processing
         System.out.println(jsonMovements);
+        return jsonMovements;
     }
 }
 
 class MergeSuite extends CardSuite {
     @Override
-    public void sort(int[] arr) {
+    public String cardSort(int[] arr) {
         // reset instance variables
         iterations = 0;
         comparisons = 0;
@@ -191,9 +199,10 @@ class MergeSuite extends CardSuite {
 
         // Send the JSON string via HTTP request or do further processing
         System.out.println(jsonMovements);
+        return jsonMovements;
     }
 
-    // recursive method for merge sort
+    // recursive method for merge cardSort
     private void mergeSort(int[] arr, int left, int right, JsonArray movements) {
         if (left < right) {
             // middle point
@@ -286,12 +295,12 @@ class MergeSuite extends CardSuite {
 
     public static void main(String[] args) {
         // BubbleSuite bs = new BubbleSuite();
-        // bs.testRandomValues();
+        // bs.cardPopulate();
         // SelectionSuite ss = new SelectionSuite();
-        // ss.testRandomValues();
+        // ss.cardPopulate();
         // InsertionSuite is = new InsertionSuite();
-        // is.testRandomValues();
+        // is.cardPopulate();
         MergeSuite ms = new MergeSuite();
-        ms.testRandomValues();
+        ms.cardPopulate();
     }
 }
