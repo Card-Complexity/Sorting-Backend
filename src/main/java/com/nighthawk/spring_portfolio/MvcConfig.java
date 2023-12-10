@@ -26,5 +26,14 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins("https://nighthawkcoders.github.io", "http://localhost:4000");
     }
+
+    //attempted CORS fix
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/sorts/bubble", "/api/sorts/selection", "/api/sorts/merge", "/api/sorts/insertion")
+                .allowedOrigins("http://localhost:8085", "https://card-complexity.github.io/Card-Visualization-Frontend/")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*");
+    }
     
 }
