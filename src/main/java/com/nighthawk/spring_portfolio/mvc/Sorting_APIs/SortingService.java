@@ -5,28 +5,51 @@ import org.springframework.stereotype.Service;
 @Service
 public class SortingService {
 
-    public int[] bubbleSort(int[] array) {
+    public String bubbleSort() {
         Bubble bubble = new Bubble();
-        bubble.sort(array);
-        return array;
+        String result = bubble.test();
+        return result;
     }
 
-    public int[] insertionSort(int[] array) {
+    public String insertionSort() {
         Insertion insertion = new Insertion();
-        insertion.sort(array);
-        return array;
+        String result = insertion.test();
+        return result;
     }
 
-    public int[] mergeSort(int[] array) {
+    public String mergeSort() {
         Merge merge = new Merge();
-        merge.sort(array);
-        return array;
+        String result = merge.test();
+        return result;
     }
 
-    public int[] selectionSort(int[] array) {
+    public String selectionSort() {
         Selection selection = new Selection();
-        selection.sort(array);
-        return array;
+        String result = selection.test();
+        return result;
     }
 
+    public String bubbleCards() {
+        BubbleSuite bubble = new BubbleSuite();
+        String result = bubble.cardPopulate();
+        return result;
+    }
+
+    public String insertionCards() {
+        InsertionSuite insertion = new InsertionSuite();
+        String result = insertion.cardPopulate();
+        return result;
+    }
+
+    public String mergeCards() {
+        MergeSuite merge = new MergeSuite();
+        String result = merge.cardPopulate();
+        return result;
+    }
+
+    public String selectionCards() {
+        SelectionSuite selection = new SelectionSuite();
+        String result = selection.cardPopulate();
+        return result;
+    }
 }

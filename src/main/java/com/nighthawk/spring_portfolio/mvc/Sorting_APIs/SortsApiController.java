@@ -1,18 +1,12 @@
 package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin()
 @RequestMapping("/api/sorts")
 public class SortsApiController {
-
     private final SortingService sortingService;
 
     @Autowired
@@ -20,32 +14,43 @@ public class SortsApiController {
         this.sortingService = sortingService;
     }
 
-    @PostMapping("/bubble")
-    public String[] bubbleSort() {
-        String[] newCards = {"3", "4", "9", "ACE", "6", "6", "2", "JACK", "9", "3"};
-        // return sortingService.bubbleSort(cards);
-        return newCards;
-    }    
-
-    @PostMapping("/insertion")
-    public String[] insertionSort(@RequestBody String[] cards) {
-        // return sortingService.insertionSort(cards);
-        String[] newCards = {"3", "4", "9", "ACE", "6", "6", "2", "JACK", "9", "3"};
-        return newCards;
+    @GetMapping("/bubble")
+    public String bubbleSort() {
+        return sortingService.bubbleSort();
     }
 
-    @PostMapping("/merge")
-    public String[] mergeSort(@RequestBody String[] cards) {
-        // return sortingService.mergeSort(cards);
-        String[] newCards = {"3", "4", "9", "ACE", "6", "6", "2", "JACK", "9", "3"};
-        return newCards;
+    @GetMapping("/insertion")
+    public String insertionSort() {
+        return sortingService.insertionSort();
     }
 
-    @PostMapping("/selection")
-    public String[] selectionSort(@RequestBody String[] cards) {
-        // return sortingService.selectionSort(cards);
-        String[] newCards = {"3", "4", "9", "ACE", "6", "6", "2", "JACK", "9", "3"};
-        return newCards;
+    @GetMapping("/merge")
+    public String mergeSort() {
+        return sortingService.mergeSort();
     }
 
+    @GetMapping("/selection")
+    public String selectionSort() {
+        return sortingService.selectionSort();
+    }
+
+    @GetMapping("/bubbleCards")
+    public String bubbleCards() {
+        return sortingService.bubbleCards();
+    }
+
+    @GetMapping("/insertionCards")
+    public String insertionCards() {
+        return sortingService.insertionCards();
+    }
+
+    @GetMapping("/mergeCards")
+    public String mergeCards() {
+        return sortingService.mergeCards();
+    }
+
+    @GetMapping("/selectionCards")
+    public String selectionCards() {
+        return sortingService.selectionCards();
+    }
 }

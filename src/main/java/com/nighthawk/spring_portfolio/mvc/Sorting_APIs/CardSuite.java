@@ -6,7 +6,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class CardSuite extends Generics {
-
     public String cardPopulate() {
         JsonObject analytics = new JsonObject();
         int[] arr = new int[13];
