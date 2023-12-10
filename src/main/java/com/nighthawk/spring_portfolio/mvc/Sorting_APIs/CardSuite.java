@@ -284,12 +284,6 @@ class MergeSuite extends CardSuite {
             movement.addProperty("Original", mid + 1 + j - 1);
             movement.addProperty("Final", k - 1);
             movements.add(movement);
-
-            // Convert JSON array to string
-            String jsonMovements = movements.toString();
-
-            // Send the JSON string via HTTP request or do further processing
-            System.out.println(jsonMovements);
         }
     }
 
