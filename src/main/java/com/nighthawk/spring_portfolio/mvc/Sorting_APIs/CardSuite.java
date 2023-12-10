@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 
 public class CardSuite extends Generics {
 
-    public JsonObject cardPopulate() {
+    public String cardPopulate() {
         int[] arr = new int[13];
         Random rand = new Random();
         boolean[] used = new boolean[14]; // to keep track of used values
@@ -25,7 +25,7 @@ public class CardSuite extends Generics {
 
         // Perform sorting and measure time
         long startTime = System.nanoTime();
-        cardSort(arr);
+        JsonArray movements = cardSort(arr);
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1000000; // in milliseconds
 
@@ -44,19 +44,22 @@ public class CardSuite extends Generics {
         analytics.addProperty("Comparisons", comparisons);
         analytics.addProperty("TimeTaken", duration);
 
+        movements.add(analytics);
+
         // Send the analytics JSON object via HTTP request or do further processing
-        System.out.println("Analytics: " + analytics.toString());
-        return analytics;
+        System.out.println("Data: " + movements.toString());
+        return movements.toString();
     }
 
-    public String cardSort(int[] arr) {
-        return "";
+    public JsonArray cardSort(int[] arr) {
+        JsonArray movements = new JsonArray();
+        return movements;
     }
 }
 
 class BubbleSuite extends CardSuite {
     @Override
-    public String cardSort(int[] arr) {
+    public JsonArray cardSort(int[] arr) {
         iterations = 0;
         comparisons = 0;
         swaps = 0;
@@ -92,13 +95,13 @@ class BubbleSuite extends CardSuite {
         // Send the JSON string via HTTP request or do further processing
         System.out.println(jsonMovements);
 
-        return jsonMovements;
+        return movements;
     }
 }
 
 class SelectionSuite extends CardSuite {
     @Override
-    public String cardSort(int[] arr) {
+    public JsonArray cardSort(int[] arr) {
         iterations = 0;
         comparisons = 0;
         swaps = 0;
@@ -138,13 +141,13 @@ class SelectionSuite extends CardSuite {
 
         // Send the JSON string via HTTP request or do further processing
         System.out.println(jsonMovements);
-        return jsonMovements;
+        return movements;
     }
 }
 
 class InsertionSuite extends CardSuite {
     @Override
-    public String cardSort(int[] arr) {
+    public JsonArray cardSort(int[] arr) {
         iterations = 0;
         comparisons = 0;
         swaps = 0;
@@ -179,13 +182,13 @@ class InsertionSuite extends CardSuite {
 
         // Send the JSON string via HTTP request or do further processing
         System.out.println(jsonMovements);
-        return jsonMovements;
+        return movements;
     }
 }
 
 class MergeSuite extends CardSuite {
     @Override
-    public String cardSort(int[] arr) {
+    public JsonArray cardSort(int[] arr) {
         // reset instance variables
         iterations = 0;
         comparisons = 0;
@@ -199,7 +202,7 @@ class MergeSuite extends CardSuite {
 
         // Send the JSON string via HTTP request or do further processing
         System.out.println(jsonMovements);
-        return jsonMovements;
+        return movements;
     }
 
     // recursive method for merge cardSort
