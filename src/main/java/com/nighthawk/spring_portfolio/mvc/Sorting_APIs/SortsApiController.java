@@ -21,23 +21,31 @@ public class SortsApiController {
     }
 
     @PostMapping("/bubble")
-    public int[] bubbleSort(@RequestBody int[] cards) {
-        return sortingService.bubbleSort(cards);
-    }
+    public String[] bubbleSort() {
+        String[] newCards = {"3", "4", "9", "ACE", "6", "6", "2", "JACK", "9", "3"};
+        // return sortingService.bubbleSort(cards);
+        return newCards;
+    }    
 
     @PostMapping("/insertion")
-    public int[] insertionSort(@RequestBody int[] cards) {
-        return sortingService.insertionSort(cards);
+    public String[] insertionSort(@RequestBody String[] cards) {
+        // return sortingService.insertionSort(cards);
+        String[] newCards = {"3", "4", "9", "ACE", "6", "6", "2", "JACK", "9", "3"};
+        return newCards;
     }
 
     @PostMapping("/merge")
-    public int[] mergeSort(@RequestBody int[] cards) {
-        return sortingService.mergeSort(cards);
+    public String[] mergeSort(@RequestBody String[] cards) {
+        // return sortingService.mergeSort(cards);
+        String[] newCards = {"3", "4", "9", "ACE", "6", "6", "2", "JACK", "9", "3"};
+        return newCards;
     }
 
     @PostMapping("/selection")
-    public int[] selectionSort(@RequestBody int[] cards) {
-        return sortingService.selectionSort(cards);
+    public String[] selectionSort(@RequestBody String[] cards) {
+        // return sortingService.selectionSort(cards);
+        String[] newCards = {"3", "4", "9", "ACE", "6", "6", "2", "JACK", "9", "3"};
+        return newCards;
     }
 
 }
