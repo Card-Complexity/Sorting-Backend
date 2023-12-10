@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 public class CardSuite extends Generics {
 
     public String cardPopulate() {
+        JsonObject analytics = new JsonObject();
         int[] arr = new int[13];
         Random rand = new Random();
         boolean[] used = new boolean[14]; // to keep track of used values
@@ -20,7 +21,7 @@ public class CardSuite extends Generics {
             arr[i] = value;
             used[value] = true;
         }
-
+        analytics.addProperty("BeforeSorting", Arrays.toString(arr));
         System.out.println("Before sorting: " + Arrays.toString(arr));
 
         // Perform sorting and measure time
@@ -36,8 +37,6 @@ public class CardSuite extends Generics {
         System.out.println("Time taken: " + duration + " milliseconds");
 
         // Create analytics JSON object
-        JsonObject analytics = new JsonObject();
-        analytics.addProperty("BeforeSorting", Arrays.toString(arr));
         analytics.addProperty("AfterSorting", Arrays.toString(arr));
         analytics.addProperty("Iterations", iterations);
         analytics.addProperty("Swaps", swaps);
