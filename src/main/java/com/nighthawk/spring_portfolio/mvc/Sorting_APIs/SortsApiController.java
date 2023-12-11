@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin()
 @RequestMapping("/api/sorts")
 public class SortsApiController {
     private final SortingService sortingService;
