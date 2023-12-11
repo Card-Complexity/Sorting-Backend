@@ -1,4 +1,3 @@
-
 package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
 
 public class Merge extends Generics {
@@ -37,42 +36,52 @@ public class Merge extends Generics {
 
         for (int i = 0; i < n1; ++i)
             leftArr[i] = arr[left + i];
-        swaps++;
         for (int j = 0; j < n2; ++j)
             rightArr[j] = arr[mid + 1 + j];
-        swaps++;
 
         // merging arrays
 
         int i = 0, j = 0;
-
         int k = left;
         while (i < n1 && j < n2) {
             iterations++;
             if (leftArr[i] <= rightArr[j]) {
+                // Only increment swaps if there's an actual change in the value
+                if (arr[k] != leftArr[i]) {
+                    swaps++;
+                }
                 arr[k] = leftArr[i];
                 i++;
             } else {
+                // Only increment swaps if there's an actual change in the value
+                if (arr[k] != rightArr[j]) {
+                    swaps++;
+                }
                 arr[k] = rightArr[j];
                 j++;
             }
             k++;
-            swaps++;
             comparisons++;
         }
 
         while (i < n1) {
+            // Only increment swaps if there's an actual change in the value
+            if (arr[k] != leftArr[i]) {
+                swaps++;
+            }
             arr[k] = leftArr[i];
             i++;
             k++;
-            swaps++;
         }
 
         while (j < n2) {
+            // Only increment swaps if there's an actual change in the value
+            if (arr[k] != rightArr[j]) {
+                swaps++;
+            }
             arr[k] = rightArr[j];
             j++;
             k++;
-            swaps++;
         }
     }
 

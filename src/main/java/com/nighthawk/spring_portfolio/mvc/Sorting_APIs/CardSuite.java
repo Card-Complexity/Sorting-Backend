@@ -193,6 +193,7 @@ class InsertionSuite extends CardSuite {
 }
 
 class MergeSuite extends CardSuite {
+
     @Override
     public JsonArray cardSort(int[] arr) {
         // reset instance variables
@@ -227,7 +228,6 @@ class MergeSuite extends CardSuite {
     }
 
     private void merge(int[] arr, int left, int mid, int right, JsonArray movements) {
-
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
@@ -236,56 +236,66 @@ class MergeSuite extends CardSuite {
 
         for (int i = 0; i < n1; ++i)
             leftArr[i] = arr[left + i];
-        swaps++;
         for (int j = 0; j < n2; ++j)
             rightArr[j] = arr[mid + 1 + j];
-        swaps++;
 
         // merging arrays
 
         int i = 0, j = 0;
-
         int k = left;
+
         while (i < n1 && j < n2) {
             iterations++;
             if (leftArr[i] <= rightArr[j]) {
+                // Only increment swaps if there's an actual change in the value
+                if (arr[k] != leftArr[i]) {
+                    swaps++;
+                }
                 arr[k] = leftArr[i];
                 i++;
             } else {
+                // Only increment swaps if there's an actual change in the value
+                if (arr[k] != rightArr[j]) {
+                    swaps++;
+                }
                 arr[k] = rightArr[j];
                 j++;
             }
             k++;
-            swaps++;
-            comparisons++;
 
             // Add movement to JSON array
             JsonObject movement = new JsonObject();
             movement.addProperty("M", arr[k - 1]);
-            movement.addProperty("Original", left + i - 1);
-            movement.addProperty("Final", k - 1);
+            movement.addProperty("Original", k - 1);
+            movement.addProperty("Final", k);
             movements.add(movement);
         }
 
         while (i < n1) {
+            // Only increment swaps if there's an actual change in the value
+            if (arr[k] != leftArr[i]) {
+                swaps++;
+            }
             arr[k] = leftArr[i];
             i++;
             k++;
-            swaps++;
 
             // Add movement to JSON array
             JsonObject movement = new JsonObject();
             movement.addProperty("M", arr[k - 1]);
-            movement.addProperty("Original", left + i - 1);
-            movement.addProperty("Final", k - 1);
+            movement.addProperty("Original", k - 1);
+            movement.addProperty("Final", k);
             movements.add(movement);
         }
 
         while (j < n2) {
+            // Only increment swaps if there's an actual change in the value
+            if (arr[k] != rightArr[j]) {
+                swaps++;
+            }
             arr[k] = rightArr[j];
             j++;
             k++;
-            swaps++;
 
             // Add movement to JSON array
             JsonObject movement = new JsonObject();
@@ -303,7 +313,7 @@ class MergeSuite extends CardSuite {
         // ss.cardPopulate();
         // InsertionSuite is = new InsertionSuite();
         // is.cardPopulate();
-        // MergeSuite ms = new MergeSuite();
-        // ms.cardPopulate();
+        MergeSuite ms = new MergeSuite();
+        ms.cardPopulate();
     }
 }
