@@ -27,7 +27,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addMapping("/api/sorts/bubble")
             .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
             .allowedMethods("GET", "POST", "PUT", "DELETE")
-            .allowedHeaders("*");
+            .allowedHeaders("*"); 
     
         registry.addMapping("/api/sorts/selection")
             .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
