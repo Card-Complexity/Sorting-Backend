@@ -80,6 +80,13 @@ public class MvcConfig implements WebMvcConfigurer {
                         "http://127.0.0.1:4100/Card-Visualization-Frontend/")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*");
+
+        registry.addMapping("/api/sorts/fibonacci")
+                .allowedOrigins("http://127.0.0.1:5500",
+                        "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085",
+                        "http://127.0.0.1:4100/Card-Visualization-Frontend/")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*");
     }
 
 }
