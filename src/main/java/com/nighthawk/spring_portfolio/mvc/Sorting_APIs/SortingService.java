@@ -58,4 +58,10 @@ public class SortingService {
         String result = fibonacci.test();
         return result;
     }
+
+    public String palindrome(String input) {
+        Palindrome palindrome = new Palindrome();
+        String result = palindrome.test(input);
+        return result;
+    }
 }

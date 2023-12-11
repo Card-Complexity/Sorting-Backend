@@ -2,6 +2,8 @@ package com.nighthawk.spring_portfolio.mvc.Sorting_APIs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/sorts")
@@ -57,4 +59,12 @@ public class SortsApiController {
     public String fibonacci() {
         return sortingService.fibonacci();
     }
+
+    // IDK why this isn't working even though in it's own file it works fine, like
+    // it shouldn't always return false
+    @PostMapping("/palindrome")
+    public String palindrome(@RequestBody String str) {
+        return sortingService.palindrome(str);
+    }
+
 }
