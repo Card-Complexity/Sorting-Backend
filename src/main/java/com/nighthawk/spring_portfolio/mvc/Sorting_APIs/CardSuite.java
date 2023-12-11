@@ -161,15 +161,23 @@ class InsertionSuite extends CardSuite {
                 comparisons++;
                 swaps++;
                 arr[j + 1] = arr[j];
+
+                // Record movement before updating the array
+                JsonObject movement = new JsonObject();
+                movement.addProperty("I", arr[j]);
+                movement.addProperty("Original", j);
+                movement.addProperty("Final", j + 1);
+                movements.add(movement);
+
                 j = j - 1;
                 iterations++;
             }
             swaps++;
             arr[j + 1] = key;
 
-            // Add movement to JSON array
+            // Add movement to JSON array for the key
             JsonObject movement = new JsonObject();
-            movement.addProperty("I", arr[j + 1]);
+            movement.addProperty("I", key);
             movement.addProperty("Original", i);
             movement.addProperty("Final", j + 1);
             movements.add(movement);
@@ -295,7 +303,7 @@ class MergeSuite extends CardSuite {
         // ss.cardPopulate();
         // InsertionSuite is = new InsertionSuite();
         // is.cardPopulate();
-        MergeSuite ms = new MergeSuite();
-        ms.cardPopulate();
+        // MergeSuite ms = new MergeSuite();
+        // ms.cardPopulate();
     }
 }
