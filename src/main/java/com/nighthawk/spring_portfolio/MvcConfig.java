@@ -43,6 +43,26 @@ public class MvcConfig implements WebMvcConfigurer {
             .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
             .allowedMethods("GET", "POST", "PUT", "DELETE")
             .allowedHeaders("*");
+        
+            registry.addMapping("/api/sorts/bubbleCards")
+            .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*");
+    
+        registry.addMapping("/api/sorts/selectionCards")
+            .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*");
+    
+        registry.addMapping("/api/sorts/mergeCards")
+            .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*");
+    
+        registry.addMapping("/api/sorts/insertionCards")
+            .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*");
     }
 
 }
