@@ -52,4 +52,10 @@ public class SortingService {
         String result = selection.cardPopulate();
         return result;
     }
+
+    public String fibonacci() {
+        Fibonacci fibonacci = new Fibonacci();
+        String result = fibonacci.test();
+        return result;
+    }
 }

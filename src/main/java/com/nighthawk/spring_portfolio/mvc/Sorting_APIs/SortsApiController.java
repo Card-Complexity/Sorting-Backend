@@ -52,4 +52,9 @@ public class SortsApiController {
     public String selectionCards() {
         return sortingService.selectionCards();
     }
+
+    @GetMapping("/fibonacci")
+    public String fibonacci() {
+        return sortingService.fibonacci();
+    }
 }
