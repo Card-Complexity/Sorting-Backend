@@ -21,19 +21,28 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/volumes/uploads/**").addResourceLocations("file:volumes/uploads/");
     }
 
-    
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("https://nighthawkcoders.github.io", "http://localhost:4000");
+        registry.addMapping("/api/sorts/bubble")
+            .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*");
+    
+        registry.addMapping("/api/sorts/selection")
+            .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*");
+    
+        registry.addMapping("/api/sorts/merge")
+            .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*");
+    
+        registry.addMapping("/api/sorts/insertion")
+            .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*");
     }
 
-    //attempted CORS fix
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/sorts/bubble", "/api/sorts/selection", "/api/sorts/merge", "/api/sorts/insertion")
-                .allowedOrigins("http://127.0.0.1:5500", "https://card-complexity.github.io/Card-Visualization-Frontend", "http://localhost:8085")
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("*");
-    }
-    
 }
