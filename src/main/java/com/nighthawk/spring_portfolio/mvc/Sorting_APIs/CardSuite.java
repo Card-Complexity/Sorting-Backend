@@ -87,11 +87,8 @@ class BubbleSuite extends CardSuite {
             }
         }
 
-        // Convert JSON array to string
-        String jsonMovements = movements.toString();
-
-        // Send the JSON string via HTTP request or do further processing
-        System.out.println(jsonMovements);
+        // Print JSON array
+        System.out.println(movements.toString());
 
         return movements;
     }
@@ -106,22 +103,19 @@ class SelectionSuite extends CardSuite {
 
         int n = arr.length;
         JsonArray movements = new JsonArray();
-        // One by one move boundary of unsorted subarray
+
         for (int i = 0; i < n - 1; i++) {
             iterations++;
-            // Find the minimum element in unsorted array
             int min_idx = i;
             for (int j = i + 1; j < n; j++) {
                 comparisons++;
                 if (arr[j] < arr[min_idx]) {
                     min_idx = j;
                 }
-                iterations++;
             }
 
-            // Swap the found minimum element with the first
-            // element
             swaps++;
+            // Swap the found minimum element with the first element
             int temp = arr[min_idx];
             arr[min_idx] = arr[i];
             arr[i] = temp;
@@ -134,11 +128,9 @@ class SelectionSuite extends CardSuite {
             movements.add(movement);
         }
 
-        // Convert JSON array to string
-        String jsonMovements = movements.toString();
+        // Print JSON array
+        System.out.println(movements.toString());
 
-        // Send the JSON string via HTTP request or do further processing
-        System.out.println(jsonMovements);
         return movements;
     }
 }
@@ -152,6 +144,7 @@ class InsertionSuite extends CardSuite {
 
         int n = arr.length;
         JsonArray movements = new JsonArray();
+
         for (int i = 1; i < n; ++i) {
             int key = arr[i];
             int j = i - 1;
@@ -183,11 +176,9 @@ class InsertionSuite extends CardSuite {
             movements.add(movement);
         }
 
-        // Convert JSON array to string
-        String jsonMovements = movements.toString();
+        // Print JSON array
+        System.out.println(movements.toString());
 
-        // Send the JSON string via HTTP request or do further processing
-        System.out.println(jsonMovements);
         return movements;
     }
 }
@@ -204,11 +195,9 @@ class MergeSuite extends CardSuite {
         JsonArray movements = new JsonArray();
         mergeSort(arr, 0, arr.length - 1, movements);
 
-        // Convert JSON array to string
-        String jsonMovements = movements.toString();
+        // Print JSON array
+        System.out.println(movements.toString());
 
-        // Send the JSON string via HTTP request or do further processing
-        System.out.println(jsonMovements);
         return movements;
     }
 
@@ -261,14 +250,15 @@ class MergeSuite extends CardSuite {
                 arr[k] = rightArr[j];
                 j++;
             }
-            k++;
 
             // Add movement to JSON array
             JsonObject movement = new JsonObject();
-            movement.addProperty("M", arr[k - 1]);
-            movement.addProperty("Original", k - 1);
-            movement.addProperty("Final", k);
+            movement.addProperty("M", arr[k]);
+            movement.addProperty("Original", k);
+            movement.addProperty("Final", k + 1);
             movements.add(movement);
+
+            k++;
         }
 
         while (i < n1) {
